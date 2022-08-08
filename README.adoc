@@ -1,0 +1,23 @@
+= Tc2038.601 Analysis and Design of Advanced Algorithms
+
+_Tecnológico de Monterrey, Estado de México._
+
+This project contains all the source files that the course instructor will be writing in class during the 2022 August-December semester.
+
+You can inspect the files directly through this site, or you can use `git` to obtain a local copy of these. In the latter case, you must do the following:
+
+1. If necessary, http://git-scm.com/downloads[install a git client] in your computer.
+ 
+2. Clone this repository. Type at the terminal:
+    
+    git clone https://github.com/ariel-ortiz/202213-tc2038.601.git tc2038
+    
+ 3. Change your current working directory to `tc2038`:
+
+    cd tc2038
++
+You will find all the project source files under this directory.
+
+4. Every time the instructor updates an existing file or creates a new one, you will need to run the repository *pull* command. Type at the terminal from within the `tc2038` directory:
+    
+    git pull
