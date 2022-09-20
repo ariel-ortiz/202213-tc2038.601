@@ -13,7 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from typing import TypeVar, Generic, List, Optional
+from typing import TypeVar, Generic, Optional
 from edge import Edge
 
 
@@ -21,9 +21,9 @@ V = TypeVar('V')  # type of the vertices in the graph
 
 
 class Graph(Generic[V]):
-    def __init__(self, vertices: List[V] = []) -> None:
-        self._vertices: List[V] = vertices
-        self._edges: List[List[Edge]] = [[] for _ in vertices]
+    def __init__(self, vertices: list[V] = []) -> None:
+        self._vertices: list[V] = vertices
+        self._edges: list[list[Edge]] = [[] for _ in vertices]
 
     @property
     def vertex_count(self) -> int:
@@ -65,19 +65,19 @@ class Graph(Generic[V]):
         return self._vertices.index(vertex)
 
     # Find the vertices that a vertex at some index is connected to
-    def neighbors_for_index(self, index: int) -> List[V]:
+    def neighbors_for_index(self, index: int) -> list[V]:
         return list(map(self.vertex_at, [e.v for e in self._edges[index]]))
 
     # Lookup a vertice's index and find its neighbors (convenience method)
-    def neighbors_for_vertex(self, vertex: V) -> List[V]:
+    def neighbors_for_vertex(self, vertex: V) -> list[V]:
         return self.neighbors_for_index(self.index_of(vertex))
 
     # Return all of the edges associated with a vertex at some index
-    def edges_for_index(self, index: int) -> List[Edge]:
+    def edges_for_index(self, index: int) -> list[Edge]:
         return self._edges[index]
 
     # Lookup the index of a vertex and return its edges (convenience method)
-    def edges_for_vertex(self, vertex: V) -> List[Edge]:
+    def edges_for_vertex(self, vertex: V) -> list[Edge]:
         return self.edges_for_index(self.index_of(vertex))
 
     # Make it easy to pretty-print a Graph
@@ -134,6 +134,6 @@ if __name__ == "__main__":
     if bfs_result is None:
         print("No solution found using breadth-first search!")
     else:
-        path: List[str] = node_to_path(bfs_result)
+        path: list[str] = node_to_path(bfs_result)
         print("Path from Boston to Miami:")
         print(path)
