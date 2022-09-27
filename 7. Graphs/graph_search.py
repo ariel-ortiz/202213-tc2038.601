@@ -62,7 +62,7 @@ if __name__ == '__main__':
     print(list(breadth_first_search('A', g)))
 
     # Doing an actual search
-    x = 'C'  # Search fot the C vertix
+    x = 'C'  # Search for the C vertix
     for i, y in enumerate(depth_first_search('A', g)):
         if y == x:  # Found it in index i
             print(f'found {x} in index {i}')
