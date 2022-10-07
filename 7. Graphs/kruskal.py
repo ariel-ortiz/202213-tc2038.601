@@ -1,19 +1,10 @@
 
 from heapq import heapify, heappop
+from pprint import pprint
 from typing import NamedTuple, Optional
 
 
 WeightedGraph = dict[str, set[tuple[str, int]]]
-
-
-g: WeightedGraph = {
-    'A': {('B', 4), ('C', 5)},
-    'B': {('A', 4)},
-    'C': {('A', 5), ('D', 6), ('E', 7)},
-    'D': {('C', 6), ('E', 2), ('F', 1)},
-    'E': {('C', 7), ('D', 2), ('F', 3)},
-    'F': {('D', 1), ('E', 3)}
-}
 
 
 class Edge(NamedTuple):
@@ -83,24 +74,35 @@ def kruskal_mst(graph: WeightedGraph) -> tuple[int, WeightedGraph]:
     result: WeightedGraph = {k: set() for k in graph}
     remaining_edges = len(graph) - 1
     total: int = 0
+    visited: set[str] = set()
     while remaining_edges:
         edge: Edge = heappop(queue)
         add_edge(result, edge)
-        if has_cycle(edge.u, result):
+        if (edge.u in visited and edge.v in visited
+                and has_cycle(edge.u, result)):
             remove_edge(result, edge)
         else:
+            visited.add(edge.u)
+            visited.add(edge.v)
             total += edge.weight
             remaining_edges -= 1
     return (total, result)
 
 
 if __name__ == '__main__':
-    e1 = Edge(1, 'D', 'E')
-    e2 = Edge(4, 'A', 'B')
-    e3 = Edge(1, 'D', 'E')
-    e4 = Edge(1, 'E', 'D')
-    s = {e1, e2, e3, e4}
-    print(e1 == e2)
-    print(e1 == e3)
-    print(e1 == e4)
-    print(s)
+    g1: WeightedGraph = {
+        'A': {('B', 4), ('C', 5)},
+        'B': {('A', 4)},
+        'C': {('A', 5), ('D', 6), ('E', 7)},
+        'D': {('C', 6), ('E', 2), ('F', 1)},
+        'E': {('C', 7), ('D', 2), ('F', 3)},
+        'F': {('D', 1), ('E', 3)}
+    }
+    g2: WeightedGraph = {
+        'A': {('B', 1), ('C', 1), ('D', 1), ('E', 1)},
+        'B': {('A', 1), ('C', 1), ('D', 1), ('E', 1)},
+        'C': {('A', 1), ('B', 1), ('D', 1), ('E', 1)},
+        'D': {('A', 1), ('B', 1), ('C', 1), ('E', 1)},
+        'E': {('A', 1), ('B', 1), ('C', 1), ('D', 1)},
+    }
+    pprint(kruskal_mst(g1))
