@@ -68,6 +68,20 @@ class Trie(Generic[T]):
             return current.value
         return None
 
+    def remove(self, key: str) -> bool:
+        current: Optional[Trie.Node[T]] = self.__root
+        for c in key:
+            i: int = Trie.__c2i(c)
+            if isinstance(current, Trie.Node):
+                if not current[i]:
+                    return False
+                current = current[i]
+        if isinstance(current, Trie.Node):
+            if current.value is not None:
+                current.value = None
+                return True
+        return False
+
     @staticmethod
     def __c2i(c: str) -> int:
         return ord(c.lower()) - ord('a')
@@ -82,7 +96,13 @@ if __name__ == '__main__':
     t.insert('help', 1)
     t.insert('he', 2)
     t.insert('hello', 3)
+    t.insert('hello', 10)
     print(t.search('he'))
     print(t.search('hell'))
     print(t.search('hello'))
     print(t.search('ant'))
+    print(t.remove('help'))
+    print(t.remove('help'))
+    print(t.search('help'))
+    t.insert('help', 42)
+    print(t.search('help'))
