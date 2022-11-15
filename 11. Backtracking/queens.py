@@ -37,8 +37,24 @@ def solve(board: Board, col: int) -> Optional[Board]:
     return None
 
 
+def queens(n: int) -> Optional[Board]:
+    board = [[0 for _ in range(n)] for _ in range(n)]
+    return solve(board, 0)
+
+
+def print_solution(board: Board) -> None:
+    for row in board:
+        for x in row:
+            if x:
+                print('Q', end=' ')
+            else:
+                print('.', end=' ')
+        print()
+
+
 if __name__ == '__main__':
-    pprint(solve([[0, 0, 0, 0],
-                  [0, 0, 0, 0],
-                  [0, 0, 0, 0],
-                  [0, 0, 0, 0]], 0))
+    board = queens(20)
+    if board:
+        print_solution(board)
+    else:
+        print('No solution found')
