@@ -43,20 +43,7 @@ def depth_first_search(
             visited.add(current)
 
 
-# def pow2(n: int) -> Generator[int, None, None]:
-#     for i in range(n):
-#         yield 2 ** i
-
-
 if __name__ == '__main__':
-    # generator = pow2(10)
-    # print(next(generator))
-    # print(next(generator))
-    # print(next(generator))
-    # print(next(generator))
-    # for n in generator:
-    #     print(n)
-    # print(tuple(generator))
     print(list(depth_first_search('A', g)))
     print(list(breadth_first_search('A', g)))
 
