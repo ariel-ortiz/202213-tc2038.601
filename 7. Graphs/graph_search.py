@@ -1,4 +1,3 @@
-from re import X
 from typing import Generator
 from collections import deque
 
